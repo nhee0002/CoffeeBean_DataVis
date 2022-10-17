@@ -1,0 +1,34 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "width": 300,
+  "title": "Coffee Bean Quality Rating",
+  "config": {
+    "title": {
+      "fontSize": 16
+    }
+  },
+  "data": {
+   "url": "https://raw.githubusercontent.com/nhee0002/CoffeeBean_DataVis/main/data/coffee_qualilty.csv"
+  },
+  "mark": {"type": "boxplot", "extent": "min-max"},
+  "encoding": {
+    "row": {"field": "Factor", "type": "ordinal", "title": null},
+    "x": {
+      "field": "value",
+      "type": "quantitative",
+      "title": "Rating",
+      "scale": {"domain": [0, 10]}
+    },
+    "y": {"field": "Species", "type": "nominal", "title": ""},
+    "color": {
+      "field": "Species",
+      "type": "nominal",
+      "legend": {
+        "title": "Type",
+        "orient": "bottom"
+      },
+      "scale": {"range": ["#8B6EAD", "#B3446C"]}
+      
+    }
+  }
+}

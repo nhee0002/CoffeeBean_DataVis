@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://cdn.jsdelivr.net/npm/vega@5.20.2"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vega-lite@5.1.0"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vega-embed@6.17.0"></script>
+    <script src="vega_lite_vis.js"></script>
+
+    <title>FIT3179 Coffee Data Visualisation</title>
+
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="styles/styles.css"
+      media="all"
+    />
+  </head>
+  <body> 
+    <div class="wrapper">
+      <div class="main">
+        <!-- heading section -->
+        <div class="heading-sect main">
+          <h1>COFFEE BEANS</h1>
+          <div >
+              <p style="text-align: center; color: white; font-size: 16px; line-height: 20px;"> 
+                  As one of the world's most popular caffinated drinks, demand <br> 
+                  for coffee has been increasing. Here's some facts,<br>
+                  and stats about coffee beans.
+              </p>
+          </div>
+        </div>
+        <div class="body">
+          <!-- world map section -->
+          <div class="body-grid">
+            <div  class="section-head">
+              <h2>WORLD COFFEE PRODUCTION</h2>
+            </div>
+            <hr class="divider">
+            <p class="text-full">
+              The coffee plant does not thrive across the entire globe
+              Instead, they are suited to grow in conditions with 
+              warm, tropical climates and rich soils (Scott, 2015). 
+              This region has been termed the <b>'Coffee Belt'</b> 
+              (Scott, 2015).
+              <br><br>
+              The top five coffee producers include <b class="top-prod"> Brazil</b>, 
+              <b class="top-prod">Indonesia</b>, <b class="top-prod">Colombia</b>, 
+              <b class="top-prod">Ethiopia</b> and <b class="top-prod">Vietnam</b>. 
+              During the time period, <b>Brazil</b> has 
+              consistently been the top annual Coffee Producer, producing 
+              30 to 40% of total coffee beans each year. <b> Brazil</b> also
+              shows the most variation in terms of percentage production, 
+              while other countries remain relatively constant during this time period.
+            </p>
+            <div id="production_map"></div>
+          </div>
+          <!-- production and price area chart -->
+          <div class="body-grid">
+            <div class="section-head">
+              <h2> COFFEE PROUDCTION AND PRICE</h2>
+            </div>
+            <hr class="divider">
+            <p class="text-full">
+              Overall, total coffee production and price have increased since 
+              1990. While there are over 50 coffee producing countries, most 
+              coffee bean production can be accounted for by the top five coffee 
+              producers which include <b class="top-prod"> Brazil</b>, 
+              <b class="top-prod">Indonesia</b>, <b class="top-prod"> Colombia</b>, 
+              <b class="top-prod"> Ethiopia</b> and <b class="top-prod"> Vietnam</b>. 
+              During most years, the top five producers produce 
+              <b class="top-prod">more than 50% of the coffee.</b>  
+            </p>
+            <div id="production_price_chart"></div>
+          </div>
+          <!-- Bar Charts -->
+          <div class="body-grid">
+            <div class="section-head" style="padding-bottom: 10px;">
+              <h2>TOP COFFEE IMPORTERS AND EXPORTERS</h2>
+            </div>
+            <hr class="divider">
+            <div id="import_export_chart"></div>
+          </div>
+          <!-- Coffee Bean Quality -->   
+          <div class="body-grid">
+            <div class="section-head">
+              <h2>COFFEE BEAN QUALITY</h2>
+            </div>
+            <hr class="divider">
+            <div class="body-col" style="width: 80%;">
+              <div class="grid-column" style="width: 50%;">
+                <div id="coffee_quality_boxplot"></div>
+              </div>
+              <div class="grid-column" style="width: 50%; padding: 0 50px 75px 50px;">
+                <p>
+                  There are four main coffee species in the world these 
+                  include Arabica, Robusta Liberica and Exelsa. Arabica 
+                  and Robsuta are most common (Cafe Direct, 2020)
+                  <br><br>
+                  Overall, quality ratings for Arabica and Robusta are quite high, 
+                  averaging around 7.5 out of 10 for each quality criteria. 
+                  However, Arabica seems to have more variance for each of 
+                  criterias.
+                </p> 
+              </div>  
+            </div> 
+            <div id="import_export_chart"></div>
+          </div>     
+        </div>
+        <!-- footer section -->    
+          <div class="footer-wrapper">
+            <div>
+              <b>Sources:</b> <br>
+              Café Direct. (2020). Coffee bean types and their characteristics. 
+              Retrieved from https://www.cafedirect.co.uk/shop/coffee-bean-types-and-their-characteristics/
+              <br>
+              Scott, M. (2015). Climate & coffee. 
+              Retrieved from: https://www.climate.gov/news-features/climate-and/climate-coffee  
+            </div>
+            <div style="text-align: right;">
+              Data Visualisation 2 <br>
+              By Naomi He
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>    
+  </body>
+</html>

@@ -1,0 +1,105 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "title": "Total Production by Producer Groups",
+  "config": {
+    "line": {
+      "color": "#393b79"
+    },
+    "title": {
+      "fontSize": 16
+    }
+  },
+  "vconcat": [
+    {
+      "data": {
+        "url": "https://raw.githubusercontent.com/nhee0002/CoffeeBean_DataVis/main/data/production_total.csv"
+      },
+      "width": 700,
+      "height": 250,
+      "mark": "area",
+      "encoding": {
+        "x": {
+          "timeUnit": "year",
+          "field": "Year",
+          "title": "Year",
+          "type": "temporal",
+          "axis": { "format": "%Y", "grid": false },
+          "scale": { "domain": { "param": "brush" } }
+        },
+        "y": {
+          "aggregate": "sum",
+          "field": "Qty",
+          "title": "Total Production (million kg)",
+          "type": "quantitative",
+          "scale": { "domain": [0, 12000] }
+        },
+        "color": {
+          "field": "Group",
+          "type": "nominal",
+          "legend": {
+            "direction": "horizontal",
+            "orient": "none",
+            "legendX": 8,
+            "legendY": 8,
+            "title": "Producer Group"
+          },
+          "scale": { "range": ["#aec7e8", "#8c564b"] }
+        },
+        "tooltip": [
+          {
+            "field": "Group",
+            "type": "nominal"
+          },
+          {
+            "field": "Qty",
+            "aggregate": "sum",
+            "type": "quantitative",
+            "title": "Production (million kg)",
+            "format": ".2f"
+          }
+        ]
+      }
+    },
+    {
+      "data": {
+        "url": "https://raw.githubusercontent.com/nhee0002/CoffeeBean_DataVis/main/data/coffee_price.csv"
+      },
+      "title": "Use the line chart to filter by year",
+      "width": 700,
+      "height": 75,
+      "mark": "line",
+      "params": [
+        {
+          "name": "brush",
+          "select": { "type": "interval", "encodings": ["x"] }
+        }
+      ],
+      "encoding": {
+        "x": {
+          "field": "Year",
+          "type": "temporal",
+          "timeUnit": "year",
+          "axis": { "tickCount": 10 },
+          "title": "Year"
+        },
+        "y": {
+          "field": "Price",
+          "type": "quantitative",
+          "axis": { "tickCount": 3, "grid": false },
+          "scale": { "domain": [0, 20] }
+        },
+        "tooltip": [
+          {
+            "field": "Year",
+            "timeUnit": "year",
+            "title": "Year"
+          },
+          {
+            "field": "Price",
+            "title": "Price (USD per Kilogram)"
+          }
+        ]
+      }
+    }
+  ]
+}

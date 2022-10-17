@@ -1,0 +1,220 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "config": {
+    "title": {
+      "fontSize": 16
+    }
+  },
+  "params": [
+    {
+      "name": "select_year",
+      "value": 2018,
+      "bind": {
+        "input": "range",
+        "min": 1990,
+        "max": 2018,
+        "step": 1,
+        "name": "Select a year:"
+      }
+    }
+  ],
+  "hconcat": [
+    {
+      "title": "Top Coffee Bean Importers",
+      "width": 285,
+      "height": 280,
+      "data": {
+        "url": "https://raw.githubusercontent.com/nhee0002/CoffeeBean_DataVis/main/data/coffee_imports.csv"
+      },
+      "transform": [
+        { "filter": "datum.Year == select_year" },
+        {
+          "window": [{ "op": "rank", "as": "rank" }],
+          "sort": [{ "field": "TotalImport", "order": "ascending" }]
+        },
+        { "filter": "datum.rank <= 5" }
+      ],
+      "encoding": {
+        "y": {
+          "field": "Country",
+          "type": "nominal",
+          "title": "Importing Country"
+        },
+        "x": {
+          "field": "TotalImport",
+          "title": "Coffee Bean Imports (Million Kilogram)",
+          "type": "quantitative",
+          "axis": {
+            "domainOpacity": 0.8,
+            "tickCount": 5,
+            "tickOpacity": 0.5,
+            "labelOpacity": 0.8,
+            "tickWidth": 0.8
+          },
+          "scale": { "domain": [0, 2400] }
+        },
+        "tooltip": [
+          {
+            "field": "Country",
+            "type": "nominal"
+          },
+          {
+            "field": "Year",
+            "type": "nominal"
+          },
+          {
+            "field": "TotalImport",
+            "type": "quantitative",
+            "title": "Total Import (million kg)",
+            "format": ".0f"
+          }
+        ]
+      },
+      "layer": [
+        { "mark": { "type": "bar", "color": "#A6816E" } },
+        {
+          "mark": {
+            "type": "text",
+            "align": "left",
+            "baseline": "middle",
+            "dx": 3,
+            "color": "black"
+          },
+          "encoding": {
+            "text": {
+              "aggregate": "sum",
+              "field": "TotalImport",
+              "type": "quantitative",
+              "format": ".0f"
+            }
+          }
+        },
+        {
+          "transform": [
+            {
+              "filter": {
+                "field": "Country",
+                "equal": "USA"
+              }
+            },
+            {
+              "calculate": "'In all years, the; USA is the greatest; coffee bean importer.'",
+              "as": "text_annotation_raw"
+            },
+            {
+              "calculate": "split(datum.text_annotation_raw, ';')",
+              "as": "text_annotation"
+            }
+          ],
+          "mark": {
+            "type": "text",
+            "align": "right",
+            "dx": -10,
+            "dy": -11,
+            "color": "white",
+            "baseline": "middle"
+          },
+          "encoding": { "text": { "field": "text_annotation" } }
+        }
+      ]
+    },
+    {
+      "title": "Top Coffee Bean Exporters",
+      "width": 280,
+      "height": 280,
+      "data": {
+        "url": "https://raw.githubusercontent.com/nhee0002/CoffeeBean_DataVis/main/data/coffee_exports.csv"
+      },
+      "transform": [
+        { "filter": "datum.Year == select_year" },
+        {
+          "window": [{ "op": "rank", "as": "rank" }],
+          "sort": [{ "field": "Total_Export", "order": "ascending" }]
+        },
+        { "filter": "datum.rank <= 5" }
+      ],
+      "encoding": {
+        "y": {
+          "field": "Country",
+          "type": "nominal",
+          "title": "Exporting Country"
+        },
+        "x": {
+          "field": "Total_Export",
+          "title": "Coffee Bean Exports (Million Kilograms)",
+          "type": "quantitative",
+          "axis": {
+            "domainOpacity": 0.7,
+            "tickCount": 5,
+            "tickOpacity": 0.7,
+            "labelOpacity": 1,
+            "tickWidth": 0.5
+          },
+          "scale": { "domain": [0, 2400] }
+        },
+        "tooltip": [
+          {
+            "field": "Country",
+            "type": "nominal"
+          },
+          {
+            "field": "Year",
+            "type": "nominal"
+          },
+          {
+            "field": "Total_Export",
+            "type": "quantitative",
+            "title": "Total Exports (million kg)",
+            "format": ".0f"
+          }
+        ]
+      },
+      "layer": [
+        { "mark": { "type": "bar", "color": "#A6816E" } },
+        {
+          "mark": {
+            "type": "text",
+            "align": "left",
+            "baseline": "middle",
+            "dx": 10,
+            "color": "black"
+          },
+          "encoding": {
+            "text": {
+              "field": "Total_Export",
+              "type": "quantitative",
+              "format": ".0f"
+            }
+          }
+        },
+        {
+          "transform": [
+            {
+              "filter": {
+                "field": "Country",
+                "equal": "Brazil"
+              }
+            },
+            {
+              "calculate": "'In most years,; Brazil is the greatest;coffee bean exporter.'",
+              "as": "text_annotation_raw"
+            },
+            {
+              "calculate": "split(datum.text_annotation_raw, ';')",
+              "as": "text_annotation"
+            }
+          ],
+          "mark": {
+            "type": "text",
+            "align": "right",
+            "dx": -10,
+            "dy": -11,
+            "color": "white",
+            "baseline": "middle"
+          },
+          "encoding": { "text": { "field": "text_annotation" } }
+        }
+      ]
+    }
+  ]
+}

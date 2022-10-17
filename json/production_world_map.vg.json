@@ -1,0 +1,123 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "title": "Percentage of Annual Coffee Production",
+  "config": {
+    "title": {
+      "fontSize": 16
+    }
+  },
+  "repeat": ["1990", "1995", "2000", "2005", "2010", "2015"],
+  "columns": 2,
+  "spec": {
+    "projection": {
+      "type": "equirectangular"
+    },
+    "width": 380,
+    "height": 190,
+    "layer": [
+      {
+        "data": { "sphere": true },
+        "mark": { "type": "geoshape", "fill": "lightblue", "opacity": 0.4 }
+      },
+      {
+        "data": {
+          "url": "https://raw.githubusercontent.com/nhee0002/CoffeeBean_DataVis/main/data/ne_110m_admin_0_countries.json",
+          "format": {
+            "type": "topojson",
+            "feature": "ne_110m_admin_0_countries"
+          }
+        },
+        "mark": {
+          "type": "geoshape",
+          "fill": "lightgrey",
+          "stroke": "white",
+          "strokeWidth": 0.5,
+          "opacity": 0.8
+        }
+      },
+      {
+        "data": {
+          "url": "https://raw.githubusercontent.com/nhee0002/CoffeeBean_DataVis/main/data/production_percent.csv"
+        },
+        "transform": [
+          {
+            "lookup": "Country",
+            "from": {
+              "data": {
+                "url": "https://raw.githubusercontent.com/nhee0002/CoffeeBean_DataVis/main/data/ne_110m_admin_0_countries.json",
+                "format": {
+                  "type": "topojson",
+                  "feature": "ne_110m_admin_0_countries"
+                }
+              },
+              "key": "properties.NAME"
+            },
+            "as": "geo"
+          }
+        ],
+        "mark": { "type": "geoshape", "stroke": "#fff", "strokeWidth": 0.5 },
+        "encoding": {
+          "shape": { "field": "geo", "type": "geojson" },
+          "color": {
+            "field": { "repeat": "repeat" },
+            "type": "quantitative",
+            "scale": { "scheme": "goldorange" },
+            "legend": {
+              "format": ".2s",
+              "title": "Percent of Total Production",
+              "orient": "none",
+              "legendY": 660,
+              "legendX": 315,
+              "direction": "horizontal",
+              "gradientLength": 145
+            }
+          },
+          "tooltip": [
+            { "field": "Country", "type": "nominal", "title": "Country" },
+            {
+              "field": { "repeat": "repeat" },
+              "type": "quantitative",
+              "title": "Percentage Production",
+              "format": ".2f"
+            }
+          ]
+        }
+      },
+      {
+        "data": {
+          "url": "https://raw.githubusercontent.com/nhee0002/CoffeeBean_DataVis/main/data/ne_110m_graticules_30.json",
+          "format": { "type": "topojson", "feature": "ne_110m_graticules_30" }
+        },
+        "mark": {
+          "type": "geoshape",
+          "fill": null,
+          "stroke": "darkgrey",
+          "strokeWidth": 0.3,
+          "opacity": 0.5
+        }
+      },
+      {
+        "data": {
+          "values": [
+            {
+              "1990": "Year: 1990",
+              "1995": "Year: 1995",
+              "2000": "Year: 2000",
+              "2005": "Year: 2005",
+              "2010": "Year: 2010",
+              "2015": "Year: 2015"
+            }
+          ]
+        },
+        "mark": {
+          "type": "text",
+          "align": "right",
+          "baseline": "bottom",
+          "x": "width",
+          "y": 0
+        },
+        "encoding": { "text": { "field": { "repeat": "repeat" } } }
+      }
+    ]
+  }
+}
