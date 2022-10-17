@@ -84,7 +84,7 @@
         },
         "y": {
           "field": "Price",
-          "title": "USD per Kilogram"
+          "title": "USD per Kilogram",
           "type": "quantitative",
           "axis": { "tickCount": 3, "grid": false },
           "scale": { "domain": [0, 20] }
